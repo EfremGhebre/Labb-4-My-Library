@@ -1,0 +1,63 @@
+﻿@model Labb_4_My_Library.Models.Customer
+
+@{
+    ViewData["Title"] = "Customer Details with Loaned Books";
+}
+
+<h2>Customer Details with Loaned Books</h2> <br />
+
+<form asp-action="LoanedBooksByCustomerId" method="get">
+    <div class="form-group">
+        
+        <select id="customerId" name="id" class="form-control" asp-items="ViewBag.Customers" onchange="this.form.submit()">
+            <option value="">-- Select a Customer --</option>
+        </select>
+    </div>
+</form> <br />
+
+@if (Model != null)
+{
+    
+    <h3>@Model.Name's Details</h3>
+    
+    <div>
+        <p><h6>Email:</h6> @Model.Email</p>
+        <p><h6>Phone:</h6> @Model.PhoneNumber</p>
+    </div>
+    <br />
+    <h4>Loaned Books</h4>
+
+    @if (Model.Borrows.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Borrow Date</th>
+                    <th>Return Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var borrow in Model.Borrows)
+                {
+                    <tr>
+                        <td>@borrow.Book.Title</td>
+                        <td>@borrow.Book.Author</td>
+                        <td>@borrow.BorrowDate.ToShortDateString()</td>
+                        <td>@(borrow.ReturnDate.HasValue ? borrow.ReturnDate.Value.ToShortDateString() : "Not returned")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>This customer has not borrowed any books.</p>
+    }
+}
+
+
+<p>
+    <a asp-action="Index">Back to List</a>
+</p>

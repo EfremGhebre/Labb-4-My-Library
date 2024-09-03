@@ -1,0 +1,45 @@
+﻿@model Labb_4_My_Library.Models.DTOs.BorrowDTO
+
+@{
+    ViewData["Title"] = "Create Borrow";
+}
+
+<h2>Fill in below tables to Borrow a Book</h2>
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="CustomerId" class="control-label"></label>
+        <select asp-for="CustomerId" class="form-control" asp-items="ViewBag.Customers">
+            <option value="">-- Select Customer --</option>
+        </select>
+        <span asp-validation-for="CustomerId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="BookId" class="control-label"></label>
+        <select asp-for="BookId" class="form-control" asp-items="ViewBag.Books">
+            <option value="">-- Select Book --</option>
+        </select>
+        <span asp-validation-for="BookId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="BorrowDate" class="control-label"></label>
+        <input asp-for="BorrowDate" class="form-control" />
+        <span asp-validation-for="BorrowDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ReturnDate" class="control-label"></label>
+        <input asp-for="ReturnDate" class="form-control" />
+        <span asp-validation-for="ReturnDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

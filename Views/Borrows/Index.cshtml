@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Labb_4_My_Library.Models.Borrow>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Loan History List</h1>
+
+<p>
+    <a asp-action="Create">Click here to Borrow a Book</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Customer.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Book.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Book.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().BorrowDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Book.IsReturned)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ReturnDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Book.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Book.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BorrowDate)
+                </td>
+                <td>
+                    @* Conditional logic for Yes/No display *@
+                    @(item.Book.IsReturned ? "Yes" : "No")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReturnDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { customerId = item.CustomerId, bookId = item.BookId }) |
+                    @Html.ActionLink("Details", "Details", new { customerId = item.CustomerId, bookId = item.BookId }) |
+                    @Html.ActionLink("Delete", "Delete", new { customerId = item.CustomerId, bookId = item.BookId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
