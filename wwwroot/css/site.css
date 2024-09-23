@@ -2,6 +2,18 @@ html {
   font-size: 14px;
 }
 
+.fixed-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #f8f9fa; 
+    text-align: center;
+    padding: 15px 0;
+    z-index: 1000; /* Ensures it stays on top of other content */
+}
+
+
 @media (min-width: 768px) {
   html {
     font-size: 16px;
